@@ -112,12 +112,12 @@ const metiers = [
 
         <div v-reveal="{ from: 'right', delay: 150 }" class="relative h-[420px] md:h-[500px]">
           <img
-            src="/images/placeholder/about-main.jpg"
+            :src="asset('/images/placeholder/about-main.jpg')"
             alt=""
             class="w-[85%] h-full object-cover rounded"
           />
           <img
-            src="/images/placeholder/about-overlay.jpg"
+            :src="asset('/images/placeholder/about-overlay.jpg')"
             alt=""
             class="hidden md:block absolute -bottom-10 right-0 w-[55%] h-[55%] object-cover rounded border-8 border-white shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
           />
@@ -156,7 +156,7 @@ const metiers = [
     <!-- Trois métiers -->
     <section class="glow isolate bg-noir text-white py-[120px]">
       <img
-        src="/images/placeholder/stats-bg.jpg"
+        :src="asset('/images/placeholder/stats-bg.jpg')"
         alt=""
         class="absolute inset-0 -z-10 w-full h-full object-cover"
       />

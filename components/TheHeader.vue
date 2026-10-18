@@ -44,7 +44,7 @@ const surActivite = computed(() => route.path.startsWith('/activites'))
       >
         <NuxtLink to="/" class="flex items-center">
           <img
-            src="/images/logo/acogim-icon.png"
+            :src="asset('/images/logo/acogim-icon.png')"
             alt="ACOGIM-CI"
             class="w-auto transition-[height] duration-300"
             :class="scrolled ? 'h-9' : 'h-12'"

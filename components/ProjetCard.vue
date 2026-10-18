@@ -13,7 +13,7 @@ const badge = {
 <template>
   <article class="group bg-white rounded overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
     <div class="relative h-[260px] overflow-hidden bg-[#e5e5e5]">
-      <img :src="projet.image" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <img :src="asset(projet.image)" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       <span
         class="absolute top-5 left-5 px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.1em]"

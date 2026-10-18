@@ -64,7 +64,7 @@ function toggle(nom) {
               : 'shadow-[0_4px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]'"
           >
             <div class="relative h-[220px] overflow-hidden">
-              <img v-if="item.image" :src="item.image" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img v-if="item.image" :src="asset(item.image)" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div v-else class="glow w-full h-full bg-noir flex items-center justify-center">
                 <AppIcon :name="item.icon" class="relative w-14 h-14 text-palm" />
               </div>

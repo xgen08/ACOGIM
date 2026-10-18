@@ -78,7 +78,7 @@ const demarche = [
             class="group flex flex-col bg-white/[0.08] backdrop-blur-md rounded overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
           >
             <div class="h-[260px] overflow-hidden">
-              <img :src="offre.image" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img :src="asset(offre.image)" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
             <div class="p-8 flex flex-col flex-1">
               <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-palm mb-3">{{ offre.categorie }}</p>

@@ -71,7 +71,7 @@ const prestations = [
 
     <!-- Offres & projet -->
     <section class="glow isolate bg-noir text-white py-[120px]">
-      <img src="/images/placeholder/hero-construction.jpg" alt="" class="absolute inset-0 -z-10 w-full h-full object-cover" />
+      <img :src="asset('/images/placeholder/hero-construction.jpg')" alt="" class="absolute inset-0 -z-10 w-full h-full object-cover" />
       <div class="absolute inset-0 -z-10 bg-noir/85"></div>
       <div class="relative z-10 mx-auto max-w-[1280px] px-8">
         <p v-reveal class="eyebrow !text-palm mb-4">Offres associées</p>
