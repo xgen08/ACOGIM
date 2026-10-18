@@ -5,12 +5,20 @@ defineProps({
   // Photo de fond facultative (voile sombre + lent zoom, comme le hero de l'accueil).
   image: { type: String, default: '' }
 })
+
+const config = useRuntimeConfig()
+
+function resolveImage(path) {
+  if (!path) return ''
+  if (/^(https?:)?\/\//.test(path)) return path
+  return `${config.app.baseURL}${path.replace(/^\/+/, '')}`
+}
 </script>
 
 <template>
   <section class="glow isolate bg-noir text-white">
     <template v-if="image">
-      <img :src="image" alt="" class="hero-zoom absolute inset-0 -z-10 w-full h-full object-cover" />
+      <img :src="resolveImage(image)" alt="" class="hero-zoom absolute inset-0 -z-10 w-full h-full object-cover" />
       <div class="absolute inset-0 -z-10 bg-gradient-to-r from-noir via-noir/80 to-noir/30"></div>
     </template>
     <div class="relative z-10 mx-auto max-w-[1280px] px-8 pt-28 pb-24 md:pt-36 md:pb-28">
