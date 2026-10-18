@@ -2,6 +2,8 @@
 import { items as services } from '~/data/catalogue.js'
 import { projets } from '~/data/projets.js'
 
+const appBaseURL = useRuntimeConfig().app.baseURL
+
 const atouts = [
   {
     icon: 'layers',
@@ -138,7 +140,7 @@ const filteredProjets = computed(() =>
     <!-- Hero -->
     <section class="glow isolate bg-noir text-white">
       <img
-        src="/images/placeholder/hero-construction.jpg"
+        :src="`${appBaseURL}images/placeholder/hero-construction.jpg`"
         alt=""
         class="hero-zoom absolute inset-0 -z-10 w-full h-full object-cover object-[70%_30%]"
       />
@@ -185,7 +187,7 @@ const filteredProjets = computed(() =>
       <div class="mx-auto max-w-[1280px] px-8 grid gap-16 lg:gap-[100px] lg:grid-cols-2 items-center">
         <div v-reveal="{ from: 'left' }" class="relative h-[420px] md:h-[500px]">
           <img
-            src="/images/placeholder/about-main.jpg"
+            :src="`${appBaseURL}images/placeholder/about-main.jpg`"
             alt=""
             class="w-[85%] h-full object-cover rounded"
           />
@@ -240,7 +242,7 @@ const filteredProjets = computed(() =>
     <section id="services" ref="servicesEl" class="relative bg-noir text-white lg:h-[400vh]">
       <div class="glow isolate flex items-center py-[100px] lg:py-0 lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)]">
         <img
-          src="/images/placeholder/construction-site.jpg"
+          :src="`${appBaseURL}images/placeholder/construction-site.jpg`"
           alt=""
           class="absolute inset-0 -z-10 w-full h-full object-cover"
         />
