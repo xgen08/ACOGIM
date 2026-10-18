@@ -15,8 +15,11 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 
 export const AppIcon: typeof import("../components/AppIcon.vue")['default']
+export const CtaBanner: typeof import("../components/CtaBanner.vue")['default']
 export const DevisForm: typeof import("../components/DevisForm.vue")['default']
+export const DevisSection: typeof import("../components/DevisSection.vue")['default']
 export const PageHero: typeof import("../components/PageHero.vue")['default']
+export const ProjetCard: typeof import("../components/ProjetCard.vue")['default']
 export const TheFooter: typeof import("../components/TheFooter.vue")['default']
 export const TheHeader: typeof import("../components/TheHeader.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
@@ -43,8 +46,11 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const LazyAppIcon: LazyComponent<typeof import("../components/AppIcon.vue")['default']>
+export const LazyCtaBanner: LazyComponent<typeof import("../components/CtaBanner.vue")['default']>
 export const LazyDevisForm: LazyComponent<typeof import("../components/DevisForm.vue")['default']>
+export const LazyDevisSection: LazyComponent<typeof import("../components/DevisSection.vue")['default']>
 export const LazyPageHero: LazyComponent<typeof import("../components/PageHero.vue")['default']>
+export const LazyProjetCard: LazyComponent<typeof import("../components/ProjetCard.vue")['default']>
 export const LazyTheFooter: LazyComponent<typeof import("../components/TheFooter.vue")['default']>
 export const LazyTheHeader: LazyComponent<typeof import("../components/TheHeader.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>

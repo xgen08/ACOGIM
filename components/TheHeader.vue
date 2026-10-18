@@ -21,44 +21,53 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
 })
+
+// Lien de navigation : gris, soulignement vert qui se déploie au survol.
+const underline = "relative transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-palm after:transition-all after:duration-300 hover:after:w-full"
+const navLink = `${underline} text-muted hover:text-noir`
+// Page en cours : texte noir et soulignement plein (classe posée par NuxtLink).
+const navActive = '!text-noir after:!w-full after:!h-0.5'
+
+const route = useRoute()
+const surActivite = computed(() => route.path.startsWith('/activites'))
 </script>
 
 <template>
   <header
-    class="sticky top-0 z-50 bg-leaf text-white transition-shadow duration-300"
-    :class="scrolled ? 'shadow-xl shadow-charcoal/30' : ''"
+    class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-black/5 transition-shadow duration-300"
+    :class="scrolled ? 'shadow-[0_10px_30px_rgba(0,0,0,0.05)]' : ''"
   >
-    <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto max-w-[1280px] px-8">
       <div
         class="flex items-center justify-between transition-[height] duration-300"
-        :class="scrolled ? 'h-14' : 'h-20'"
+        :class="scrolled ? 'h-16' : 'h-20'"
       >
-        <NuxtLink to="/" class="flex items-center gap-3 font-display text-2xl tracking-wide leading-none">
+        <NuxtLink to="/" class="flex items-center">
           <img
             src="/images/logo/acogim-icon.png"
             alt="ACOGIM-CI"
-            class="w-auto bg-white rounded-md px-2 py-1 box-content transition-[height] duration-300"
-            :class="scrolled ? 'h-8' : 'h-11'"
+            class="w-auto transition-[height] duration-300"
+            :class="scrolled ? 'h-9' : 'h-12'"
           >
         </NuxtLink>
 
         <!-- Desktop nav -->
-        <nav class="hidden md:flex items-center gap-8 font-body text-sm">
-          <NuxtLink to="/" class="hover:underline decoration-2 underline-offset-8 transition-colors">Accueil</NuxtLink>
-          <NuxtLink to="/qui-sommes-nous" class="hover:underline decoration-2 underline-offset-8 transition-colors">Qui sommes-nous</NuxtLink>
+        <nav class="hidden md:flex items-center gap-10 text-sm font-medium">
+          <NuxtLink to="/" :class="navLink" :exact-active-class="navActive">Accueil</NuxtLink>
+          <NuxtLink to="/qui-sommes-nous" :class="navLink" :exact-active-class="navActive">Qui sommes-nous</NuxtLink>
 
           <div class="relative" @mouseenter="activitesOpen = true" @mouseleave="activitesOpen = false">
-            <button class="flex items-center gap-1 hover:underline decoration-2 underline-offset-8 transition-colors" :aria-expanded="activitesOpen">
+            <button class="flex items-center gap-1" :class="[navLink, surActivite && navActive]" :aria-expanded="activitesOpen">
               Nos activités
               <span class="text-xs">▾</span>
             </button>
             <div
               v-show="activitesOpen"
-              class="absolute left-0 top-full pt-3 w-64"
+              class="absolute left-0 top-full pt-4 w-64"
             >
-              <ul class="bg-paper text-charcoal shadow-xl border-t-4 border-orange">
+              <ul class="bg-white border border-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
                 <li v-for="a in activites" :key="a.to">
-                  <NuxtLink :to="a.to" class="block px-5 py-3 text-sm hover:bg-concrete transition-colors">
+                  <NuxtLink :to="a.to" class="block px-5 py-3 text-sm text-charcoal hover:bg-concrete hover:text-forest transition-colors" exact-active-class="bg-concrete !text-forest font-semibold">
                     {{ a.label }}
                   </NuxtLink>
                 </li>
@@ -66,39 +75,32 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <NuxtLink to="/realisations" class="hover:underline decoration-2 underline-offset-8 transition-colors">Réalisations</NuxtLink>
-          <NuxtLink to="/catalogue" class="hover:underline decoration-2 underline-offset-8 transition-colors">Catalogue</NuxtLink>
-          <NuxtLink
-            to="/contact"
-            class="group inline-flex items-center gap-2 bg-orange text-ink font-semibold px-4 py-2 hover:bg-white transition-colors"
-          >
-            Demander un devis
-            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </NuxtLink>
+          <NuxtLink to="/realisations" :class="navLink" :exact-active-class="navActive">Réalisations</NuxtLink>
+          <NuxtLink to="/catalogue" :class="navLink" :exact-active-class="navActive">Catalogue</NuxtLink>
+          <NuxtLink to="/contact" :class="`${underline} font-semibold text-ember hover:text-orange`" exact-active-class="after:!w-full after:!h-0.5">Nous contacter</NuxtLink>
         </nav>
 
         <!-- Mobile toggle -->
-        <button class="md:hidden" @click="open = !open" :aria-expanded="open" aria-label="Ouvrir le menu">
-          <span class="block w-7 h-0.5 bg-white mb-1.5"></span>
-          <span class="block w-7 h-0.5 bg-white mb-1.5"></span>
-          <span class="block w-7 h-0.5 bg-white"></span>
+        <button class="md:hidden p-2 -mr-2" @click="open = !open" :aria-expanded="open" aria-label="Ouvrir le menu">
+          <span class="block w-6 h-px bg-noir mb-1.5"></span>
+          <span class="block w-6 h-px bg-noir mb-1.5"></span>
+          <span class="block w-6 h-px bg-noir"></span>
         </button>
       </div>
     </div>
 
     <!-- Mobile nav -->
-    <div v-show="open" class="md:hidden bg-leaf border-t border-white/25">
-      <nav class="flex flex-col px-6 py-4 gap-4 font-body text-sm">
-        <NuxtLink to="/" @click="open = false">Accueil</NuxtLink>
-        <NuxtLink to="/qui-sommes-nous" @click="open = false">Qui sommes-nous</NuxtLink>
-        <NuxtLink v-for="a in activites" :key="a.to" :to="a.to" @click="open = false" class="pl-4 text-white">
+    <div v-show="open" class="md:hidden bg-white border-t border-black/5">
+      <nav class="flex flex-col px-8 py-5 gap-4 text-sm font-medium text-charcoal">
+        <NuxtLink to="/" @click="open = false" exact-active-class="!text-forest font-semibold">Accueil</NuxtLink>
+        <NuxtLink to="/qui-sommes-nous" @click="open = false" exact-active-class="!text-forest font-semibold">Qui sommes-nous</NuxtLink>
+        <NuxtLink v-for="a in activites" :key="a.to" :to="a.to" @click="open = false" class="pl-4 text-muted" exact-active-class="!text-forest font-semibold">
           {{ a.label }}
         </NuxtLink>
-        <NuxtLink to="/realisations" @click="open = false">Réalisations</NuxtLink>
-        <NuxtLink to="/catalogue" @click="open = false">Catalogue</NuxtLink>
-        <NuxtLink to="/contact" @click="open = false" class="text-white font-bold underline decoration-orange decoration-2 underline-offset-4">Demander un devis</NuxtLink>
+        <NuxtLink to="/realisations" @click="open = false" exact-active-class="!text-forest font-semibold">Réalisations</NuxtLink>
+        <NuxtLink to="/catalogue" @click="open = false" exact-active-class="!text-forest font-semibold">Catalogue</NuxtLink>
+        <NuxtLink to="/contact" @click="open = false" class="font-semibold text-ember" exact-active-class="underline underline-offset-4">Nous contacter</NuxtLink>
       </nav>
     </div>
-
   </header>
 </template>

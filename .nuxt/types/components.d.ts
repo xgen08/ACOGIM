@@ -15,8 +15,11 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 
 interface _GlobalComponents {
   AppIcon: typeof import("../../components/AppIcon.vue")['default']
+  CtaBanner: typeof import("../../components/CtaBanner.vue")['default']
   DevisForm: typeof import("../../components/DevisForm.vue")['default']
+  DevisSection: typeof import("../../components/DevisSection.vue")['default']
   PageHero: typeof import("../../components/PageHero.vue")['default']
+  ProjetCard: typeof import("../../components/ProjetCard.vue")['default']
   TheFooter: typeof import("../../components/TheFooter.vue")['default']
   TheHeader: typeof import("../../components/TheHeader.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
@@ -43,8 +46,11 @@ interface _GlobalComponents {
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
   LazyAppIcon: LazyComponent<typeof import("../../components/AppIcon.vue")['default']>
+  LazyCtaBanner: LazyComponent<typeof import("../../components/CtaBanner.vue")['default']>
   LazyDevisForm: LazyComponent<typeof import("../../components/DevisForm.vue")['default']>
+  LazyDevisSection: LazyComponent<typeof import("../../components/DevisSection.vue")['default']>
   LazyPageHero: LazyComponent<typeof import("../../components/PageHero.vue")['default']>
+  LazyProjetCard: LazyComponent<typeof import("../../components/ProjetCard.vue")['default']>
   LazyTheFooter: LazyComponent<typeof import("../../components/TheFooter.vue")['default']>
   LazyTheHeader: LazyComponent<typeof import("../../components/TheHeader.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>

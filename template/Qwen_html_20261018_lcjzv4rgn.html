@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACOGIM-CI — Construction, Immobilier & Maintenance Industrielle</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Palette Premium */
+      --vert-primary: #9ED400;
+      --vert-dark: #7AA800; /* Légèrement assombri pour les hovers */
+      --vert-glow: rgba(158, 212, 0, 0.15);
+      
+      --orange-primary: #E85A1B;
+      --orange-dark: #C44A14;
+      --orange-glow: rgba(232, 90, 27, 0.1);
+      
+      /* Neutres Sophistiqués */
+      --noir: #0F0F0F;
+      --gris-fonce: #1A1A1A;
+      --gris-moyen: #6B7280;
+      --gris-clair: #FAFAFA;
+      --blanc: #FFFFFF;
+      --border-light: rgba(0, 0, 0, 0.06);
+      
+      /* Typographie */
+      --font-titles: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Espacements Premium */
+      --section-padding: 120px 0;
+      --container-width: 1280px;
+      --radius: 2px; /* Coins quasi-carrés pour un aspect architectural */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gris-fonce);
+      line-height: 1.7;
+      background-color: var(--blanc);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-titles);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--noir);
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* --- TYPOGRAPHIE UTILITAIRE --- */
+    .label-premium {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--vert-primary);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 24px;
+    }
+
+    .section-title span {
+      color: var(--orange-primary);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .text-muted {
+      color: var(--gris-moyen);
+      font-size: 17px;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* --- BOUTONS --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background-color: var(--orange-primary);
+      color: var(--blanc);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--orange-glow);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--blanc);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--blanc);
+      color: var(--noir);
+      border-color: var(--blanc);
+    }
+
+    .btn-text {
+      color: var(--noir);
+      padding: 0;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 4px;
+    }
+
+    .btn-text:hover {
+      color: var(--orange-primary);
+      border-color: var(--orange-primary);
+    }
+
+    /* --- HEADER (Glassmorphism) --- */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-family: var(--font-titles);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--noir);
+      letter-spacing: -0.03em;
+    }
+
+    .logo span {
+      color: var(--vert-primary);
+    }
+
+    .nav {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gris-moyen);
+      position: relative;
+    }
+
+    .nav a:hover {
+      color: var(--noir);
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--vert-primary);
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      background-color: var(--noir);
+      color: var(--blanc);
+      padding: 160px 0 140px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle gradient glow in hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--vert-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-location {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 32px;
+      color: var(--vert-primary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-location::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background-color: var(--vert-primary);
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      margin-bottom: 32px;
+      color: var(--blanc);
+      line-height: 1.05;
+    }
+
+    .hero h1 span {
+      color: var(--orange-primary);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 48px;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* --- FEATURES (Minimalist Grid) --- */
+    .features {
+      background-color: var(--blanc);
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .feature-item {
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      transition: border-color 0.4s ease;
+    }
+
+    .feature-item:hover {
+      border-top-color: var(--vert-primary);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 24px;
+      color: var(--gris-fonce);
+    }
+
+    .feature-item:nth-child(2) .feature-icon { color: var(--vert-primary); }
+    .feature-item:nth-child(3) .feature-icon { color: var(--orange-primary); }
+    .feature-item:nth-child(4) .feature-icon { color: var(--vert-primary); }
+
+    .feature-item h3 {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--noir);
+    }
+
+    .feature-item p {
+      font-size: 14px;
+      color: var(--gris-moyen);
+      line-height: 1.7;
+    }
+
+    /* --- ABOUT SECTION --- */
+    .about {
+      padding: var(--section-padding);
+      background-color: var(--gris-clair);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      height: 500px;
+    }
+
+    .about-img-main {
+      width: 85%;
+      height: 100%;
+      background: linear-gradient(145deg, #e0e0e0 0%, #f5f5f5 100%);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-img-main::after {
+      content: 'ACOGIM-CI';
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      font-family: var(--font-titles);
+      font-size: 24px;
+      color: rgba(0,0,0,0.1);
+      font-weight: 700;
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: -40px;
+      right: 0;
+      width: 280px;
+      height: 200px;
+      background-color: var(--vert-primary);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--noir);
+      font-family: var(--font-titles);
+      font-size: 48px;
+      font-weight: 700;
+      box-shadow: 0 20px 60px rgba(158, 212, 0, 0.3);
+    }
+
+    .about-content p {
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--gris-moyen);
+      margin-bottom: 24px;
+    }
+
+    /* --- ACTIVITIES --- */
+    .activities {
+      padding: var(--section-padding);
+      background-color: var(--blanc);
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .activity-card {
+      background-color: var(--blanc);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .activity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--vert-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .activity-card:nth-child(2)::before { background-color: var(--orange-primary); }
+    .activity-card:nth-child(3)::before { background-color: var(--vert-primary); }
+
+    .activity-card:hover {
+      border-color: transparent;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+      transform: translateY(-8px);
+    }
+
+    .activity-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .activity-number {
+      font-family: var(--font-titles);
+      font-size: 48px;
+      color: rgba(0,0,0,0.04);
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+
+    .activity-card h3 {
+      font-family: var(--font-body);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--noir);
+    }
+
+    .activity-card p {
+      font-size: 15px;
+      color: var(--gris-moyen);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    /* --- SERVICES --- */
+    .services {
+      padding: var(--section-padding);
+      background-color: var(--noir);
+      color: var(--blanc);
+    }
+
+    .services .section-title { color: var(--blanc); }
+    .services .text-muted { color: rgba(255,255,255,0.6); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .service-card {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      transition: all 0.4s ease;
+    }
+
+    .service-card:hover {
+      background-color: rgba(255, 255, 255, 0.06);
+      border-color: var(--vert-primary);
+      transform: translateY(-4px);
+    }
+
+    .service-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--vert-primary);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-card:nth-child(2) .service-tag,
+    .service-card:nth-child(5) .service-tag { color: var(--orange-primary); }
+
+    .service-card h3 {
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--blanc);
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    /* --- PROJECTS --- */
+    .projects {
+      padding: var(--section-padding);
+      background-color: var(--gris-clair);
+    }
+
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+
+    .projects-filter {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      border: 1px solid var(--border-light);
+      background-color: transparent;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gris-moyen);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: var(--font-body);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--noir);
+      color: var(--blanc);
+      border-color: var(--noir);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      background-color: var(--blanc);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    .project-image {
+      height: 260px;
+      background-color: #e5e5e5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card:hover .project-image::before {
+      opacity: 1;
+    }
+
+    .project-card:nth-child(2) .project-image { background: linear-gradient(135deg, #f0f0f0 0%, #d4d4d4 100%); }
+    .project-card:nth-child(3) .project-image { background: linear-gradient(135deg, #e8e8e8 0%, #cccccc 100%); }
+
+    .project-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 6px 14px;
+      background-color: var(--blanc);
+      color: var(--noir);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 100px;
+      z-index: 2;
+    }
+
+    .project-card:nth-child(2) .project-badge { 
+      background-color: var(--orange-primary); 
+      color: var(--blanc);
+    }
+
+    .project-content {
+      padding: 28px;
+    }
+
+    .project-content h3 {
+      font-family: var(--font-body);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--noir);
+    }
+
+    .project-content p {
+      font-size: 14px;
+      color: var(--gris-moyen);
+      line-height: 1.6;
+    }
+
+    /* --- CTA SECTION --- */
+    .cta {
+      background-color: var(--vert-primary);
+      color: var(--noir);
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.4), transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 20px;
+      color: var(--noir);
+      position: relative;
+    }
+
+    .cta p {
+      font-size: 18px;
+      opacity: 0.8;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    .btn-dark {
+      background-color: var(--noir);
+      color: var(--blanc);
+      position: relative;
+    }
+
+    .btn-dark:hover {
+      background-color: var(--gris-fonce);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background-color: var(--noir);
+      color: var(--blanc);
+      padding: 100px 0 40px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 80px;
+    }
+
+    .footer-brand .logo {
+      color: var(--blanc);
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+
+    .footer-brand p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 300px;
+    }
+
+    .footer-column h4 {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 28px;
+      color: var(--blanc);
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 16px;
+    }
+
+    .footer-column a, .footer-column span {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s ease;
+      display: block;
+    }
+
+    .footer-column a:hover {
+      color: var(--vert-primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 1024px) {
+      .features-grid, .activities-grid, .services-grid, .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .about-grid { grid-template-columns: 1fr; gap: 60px; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding: 120px 0 100px 0; }
+      .hero h1 { font-size: 36px; }
+      .hero-buttons { flex-direction: column; }
+      .features-grid, .activities-grid, .services-grid, .projects-grid { grid-template-columns: 1fr; }
+      .nav { display: none; } /* Pourrait être remplacé par un menu burger */
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .projects-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">ACOGIM<span>-CI</span></div>
+      <nav class="nav">
+        <a href="#">Accueil</a>
+        <a href="#">Expertise</a>
+        <a href="#">Réalisations</a>
+        <a href="#">Catalogue</a>
+        <a href="#" style="color: var(--orange-primary); font-weight: 600;">Devis</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-location">Bingerville, Côte d'Ivoire</div>
+        <h1>Construire, gérer et <span>maintenir</span> ce qui fait tenir vos activités.</h1>
+        <p>Trois métiers, une même exigence. L'immobilier, la construction et la maintenance industrielle pilotés par une seule agence de référence à Abidjan.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary">Voir le catalogue</a>
+          <a href="#" class="btn btn-outline">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-item">
+          <!-- SVG Icon: Layers -->
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          <h3>Expertise multi-métiers</h3>
+          <p>Immobilier, construction et maintenance industrielle pilotés de manière intégrée.</p>
+        </div>
+        <div class="feature-item">
+          <!-- SVG Icon: Clipboard -->
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+          <h3>Suivi rigoureux</h3>
+          <p>De l'étude à la livraison, chaque projet est encadré avec la même exigence de qualité.</p>
+        </div>
+        <div class="feature-item">
+          <!-- SVG Icon: Shield -->
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <h3>Sécurité & conformité</h3>
+          <p>GMAO et sécurité électronique intégrées nativement à nos prestations industrielles.</p>
+        </div>
+        <div class="feature-item">
+          <!-- SVG Icon: Eye -->
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <h3>Transparence totale</h3>
+          <p>Projets réalisés, en cours et à venir, présentés avec clarté et honnêteté.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images">
+          <div class="about-img-main"></div>
+          <div class="about-img-accent">12+</div>
+        </div>
+        <div class="about-content">
+          <span class="label-premium">À propos d'ACOGIM-CI</span>
+          <h2 class="section-title">Une agence à taille humaine, <span>trois métiers complémentaires.</span></h2>
+          <p>Agence de Construction, de Gestion Immobilières et de Maintenance Côte d'Ivoire — une SARL basée à Bingerville, Abidjan.</p>
+          <p>Une gestion rigoureuse de chaque projet, de l'étude à la livraison, et un accompagnement continu pour nos clients industriels via la GMAO et la sécurité électronique.</p>
+          <a href="#" class="btn btn-text" style="margin-top: 16px;">Découvrir notre histoire →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities -->
+  <section class="activities">
+    <div class="container">
+      <span class="label-premium">Nos Activités</span>
+      <h2 class="section-title">Une SARL, <span>trois domaines d'expertise.</span></h2>
+      
+      <div class="activities-grid">
+        <div class="activity-card">
+          <div class="activity-number">01</div>
+          <h3>Immobilier</h3>
+          <p>Achat et vente de biens immobiliers, pour particuliers et entreprises, avec un accompagnement juridique complet.</p>
+          <a href="#" class="btn btn-text">En savoir plus →</a>
+        </div>
+        <div class="activity-card">
+          <div class="activity-number">02</div>
+          <h3>Construction</h3>
+          <p>Construction, gestion et vente de biens immobiliers, du terrain à la livraison, dans le respect des délais.</p>
+          <a href="#" class="btn btn-text">En savoir plus →</a>
+        </div>
+        <div class="activity-card">
+          <div class="activity-number">03</div>
+          <h3>Maintenance industrielle</h3>
+          <p>Projets et travaux de maintenance en milieu industriel, incluant GMAO et sécurité électronique.</p>
+          <a href="#" class="btn btn-text">En savoir plus →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="container">
+      <span class="label-premium" style="color: var(--vert-primary);">Nos Services</span>
+      <h2 class="section-title">Un catalogue de <span>biens et prestations.</span></h2>
+      <p class="text-muted">Des solutions sur mesure, disponibles sur devis, adaptées à la réalité du marché ivoirien.</p>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-tag">Immobilier</span>
+          <h3>Villa 4 pièces — Bingerville</h3>
+          <p>Villa neuve, terrain clos, disponible à la vente immédiate.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Immobilier</span>
+          <h3>Terrain nu — Ayopoumin</h3>
+          <p>Lot titré, viabilisé, idéal pour projet résidentiel ou commercial.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Construction</span>
+          <h3>Construction clé en main</h3>
+          <p>Étude, permis, suivi de chantier et livraison clé en main.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Maintenance</span>
+          <h3>Contrat préventif</h3>
+          <p>Intervention planifiée et déploiement GMAO pour site industriel.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Sécurité Électronique</span>
+          <h3>Pack vidéosurveillance</h3>
+          <p>Installation et paramétrage pour site commercial ou industriel.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Sécurité Électronique</span>
+          <h3>Détection incendie</h3>
+          <p>Système automatique adapté aux normes de votre secteur d'activité.</p>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 60px;">
+        <a href="#" class="btn btn-outline" style="border-color: rgba(255,255,255,0.2);">Voir le catalogue complet</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects">
+    <div class="container">
+      <div class="projects-header">
+        <div>
+          <span class="label-premium">Nos Projets</span>
+          <h2 class="section-title" style="margin-bottom: 0;">Réalisés, <span>en cours et à venir.</span></h2>
+        </div>
+        <div class="projects-filter">
+          <button class="filter-btn active">Tous</button>
+          <button class="filter-btn">Immobilier</button>
+          <button class="filter-btn">Construction</button>
+          <button class="filter-btn">Maintenance</button>
+        </div>
+      </div>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <div class="project-badge">Réalisé</div>
+          </div>
+          <div class="project-content">
+            <h3>Résidence R+2 — Bingerville</h3>
+            <p>Construction et livraison d'une résidence de standing, gestion locative assurée.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <div class="project-badge">En cours</div>
+          </div>
+          <div class="project-content">
+            <h3>Maintenance — site de production</h3>
+            <p>Déploiement GMAO et travaux de maintenance préventive pour un site partenaire.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">
+            <div class="project-badge">À venir</div>
+          </div>
+          <div class="project-content">
+            <h3>Programme de villas — Ayopoumin</h3>
+            <p>Lotissement de villas avec systèmes de sécurité électronique intégrés.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Un projet immobilier ou industriel en tête ?</h2>
+      <p>Parcourez notre catalogue de biens et services, ou décrivez-nous directement votre besoin.</p>
+      <a href="#" class="btn btn-dark">Parcourir le catalogue →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">ACOGIM<span>-CI</span></div>
+          <p>Agence de Construction, de Gestion Immobilières et de Maintenance Côte d'Ivoire. L'excellence opérationnelle au service de vos projets.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Coordonnées</h4>
+          <ul>
+            <li><span>BP : 708 CEDEX 03 Abidjan</span></li>
+            <li><span>Ayopoumin, Ex-Mitranaid, Villa n° 356</span></li>
+            <li><span>Bingerville</span></li>
+            <li><a href="tel:+2250724451423">+225 07 24 45 14 23</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact Projet</h4>
+          <ul>
+            <li><span>M. YEO Ismaëla</span></li>
+            <li><a href="tel:+2250707000207">+225 07 07 00 02 07</a></li>
+            <li><a href="tel:+2250103000190">+225 01 03 00 01 90</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#">Immobilier</a></li>
+            <li><a href="#">Construction</a></li>
+            <li><a href="#">Maintenance industrielle</a></li>
+            <li><a href="#">Mentions légales</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ACOGIM-CI. Tous droits réservés.</p>
+        <p>Conçu avec exigence à Abidjan.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

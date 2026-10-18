@@ -8,28 +8,30 @@ export default {
   ],
   theme: {
     extend: {
+      // Palette de la maquette template/Qwen_html_20261018_lcjzv4rgn.html
       colors: {
-        // Dominante verte (ruban du logo)
-        concrete: '#F1F4F0',
+        noir: '#0F0F0F',
+        charcoal: '#1A1A1A',
+        muted: '#6B7280',
+        concrete: '#FAFAFA',
         paper: '#FFFFFF',
-        charcoal: '#13231C',
-        petrol: '#15455A',
-        palm: '#8ABC26',
-        forest: '#0F6A26',
-        leaf: '#308714',
-        // Couleurs secondaires extraites du logo (métiers et accents)
-        navy: '#0C2D64',
-        royal: '#0066B3',
-        sky: '#4FC3F5',
-        steel: '#B5B5B5',
-        orange: '#F2500A',
-        brick: '#D8430C',
-        ink: '#1A1A1A'
+        // Vert lime : fonds, bordures et texte sur fond sombre
+        palm: '#9ED400',
+        // Vert lime assombri : texte sur fond clair (le lime pur y est illisible)
+        forest: '#4D7A00',
+        orange: '#E85A1B',
+        // Orange assombri : fond des boutons à texte blanc et texte orange sur fond clair
+        ember: '#C44A14',
+        petrol: '#0F0F0F'
       },
       fontFamily: {
-        display: ['"Big Shoulders Display"', 'sans-serif'],
-        body: ['"Work Sans"', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'monospace']
+        display: ['"Playfair Display"', 'serif'],
+        body: ['Inter', 'sans-serif'],
+        // La maquette n'a pas de police mono : les libellés passent en Inter
+        mono: ['Inter', 'sans-serif']
+      },
+      borderRadius: {
+        DEFAULT: '2px'
       }
     }
   },

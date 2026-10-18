@@ -12,6 +12,16 @@ export default defineNuxtConfig({
     head: {
       title: 'ACOGIM-CI — Construction, Immobilier & Maintenance Industrielle',
       htmlAttrs: { lang: 'fr' },
+      script: [
+        {
+          // Active le masquage des éléments v-reveal avant le premier affichage
+          // (évite le clignotement). Filet de sécurité : si le plugin ne
+          // démarre pas sous 4 s, tout redevient visible.
+          innerHTML:
+            "if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){var d=document.documentElement;d.classList.add('reveal-ready');setTimeout(function(){if(!window.__revealStarted)d.classList.remove('reveal-ready')},4000)}",
+          tagPosition: 'head'
+        }
+      ],
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,7 +41,7 @@ export default defineNuxtConfig({
         {
           rel: 'stylesheet',
           href:
-            'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap'
+            'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap'
         }
       ]
     }
