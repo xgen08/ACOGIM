@@ -1,3 +1,6 @@
+const isGitHubPages = process.env.GITHUB_ACTIONS === 'true'
+const basePath = isGitHubPages ? '/ACOGIM' : ''
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: false },
@@ -9,14 +12,14 @@ export default defineNuxtConfig({
     }
   },
   app: {
+    baseURL: isGitHubPages ? '/ACOGIM/' : '/',
     head: {
       title: 'ACOGIM-CI — Construction, Immobilier & Maintenance Industrielle',
       htmlAttrs: { lang: 'fr' },
       script: [
         {
-          // Active le masquage des éléments v-reveal avant le premier affichage
-          // (évite le clignotement). Filet de sécurité : si le plugin ne
-          // démarre pas sous 4 s, tout redevient visible.
+          // Active le masquage des éléments v-reveal avant le premier affichage.
+          // Filet de sécurité : si le plugin ne démarre pas sous 4 s, tout redevient visible.
           innerHTML:
             "if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){var d=document.documentElement;d.classList.add('reveal-ready');setTimeout(function(){if(!window.__revealStarted)d.classList.remove('reveal-ready')},4000)}",
           tagPosition: 'head'
@@ -32,10 +35,10 @@ export default defineNuxtConfig({
         }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: `${basePath}/favicon-32x32.png` },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${basePath}/favicon-16x16.png` },
+        { rel: 'icon', type: 'image/x-icon', href: `${basePath}/favicon.ico` },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: `${basePath}/apple-touch-icon.png` },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
