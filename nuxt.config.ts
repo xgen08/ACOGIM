@@ -1,0 +1,39 @@
+export default defineNuxtConfig({
+  compatibilityDate: '2024-11-01',
+  devtools: { enabled: false },
+  modules: ['@nuxtjs/tailwindcss'],
+  css: ['~/assets/css/main.css'],
+  vite: {
+    server: {
+      allowedHosts: ['.ngrok-free.dev', '.ngrok-free.app', '.ngrok.io']
+    }
+  },
+  app: {
+    head: {
+      title: 'ACOGIM-CI — Construction, Immobilier & Maintenance Industrielle',
+      htmlAttrs: { lang: 'fr' },
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content:
+            "ACOGIM-CI : Agence de Construction, de Gestion Immobilières et de Maintenance Côte d'Ivoire. Achat/vente de biens, construction, gestion immobilière et maintenance industrielle (GMAO, sécurité électronique)."
+        }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href:
+            'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap'
+        }
+      ]
+    }
+  }
+})

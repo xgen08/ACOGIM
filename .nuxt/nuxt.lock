@@ -1,0 +1,9 @@
+{
+  "pid": 44237,
+  "startedAt": 1792349092837,
+  "command": "dev",
+  "cwd": "/Users/mac/Desktop/Perso/ACOGIM/acogim-ci-site",
+  "port": 3000,
+  "hostname": "::1",
+  "url": "http://[::1]:3000"
+}

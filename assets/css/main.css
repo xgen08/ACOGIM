@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-concrete text-charcoal font-body antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dans @layer components pour qu'une couleur utilitaire (text-white…) puisse la surcharger. */
+@layer components {
+  .eyebrow {
+    @apply font-mono text-xs tracking-[0.25em] uppercase text-forest;
+  }
+}
+
+/* Grand texte décoratif en contour, utilisé en fond de hero.
+   -webkit-text-fill-color (pas color) hide le remplissage, pour que
+   currentColor reste disponible pour le contour. */
+.outline-text {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Trait connecteur entre les cercles d'un stepper de processus. */
+.process-line {
+  position: relative;
+}
+
+.process-line:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  background-color: theme('colors.charcoal / 15%');
+}
+
+@media (min-width: 768px) {
+  .process-line:not(:last-child)::after {
+    top: 2rem;
+    left: calc(50% + 2rem);
+    right: calc(-50% + 2rem);
+    height: 2px;
+  }
+}
+
+@media (max-width: 767px) {
+  .process-line:not(:last-child)::after {
+    top: 4rem;
+    left: 2rem;
+    width: 2px;
+    height: calc(100% - 3rem);
+  }
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #15455a;
+  outline-offset: 2px;
+}
