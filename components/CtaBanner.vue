@@ -26,9 +26,9 @@ defineProps({
   title: { type: String, default: 'Un projet immobilier ou industriel en tête ?' },
   text: {
     type: String,
-    default: 'Parcourez notre catalogue de biens et services, ou décrivez-nous directement votre besoin.'
+    default: 'Parcourez notre photothèque de biens et services, ou décrivez-nous directement votre besoin.'
   },
-  to: { type: String, default: '/catalogue' },
-  label: { type: String, default: 'Parcourir le catalogue →' }
+  to: { type: String, default: '/phototheque' },
+  label: { type: String, default: 'Parcourir la photothèque →' }
 })
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import { items } from '~/data/catalogue.js'
+import { items } from '~/data/phototheque.js'
 
 const biens = items.filter((i) => i.categorie === 'Immobilier')
 
@@ -24,11 +24,13 @@ const accompagnement = [
 <template>
   <div>
     <PageHero
+      class="[&_h1]:whitespace-nowrap [&_h1]:leading-[1.2] [&_h1]:text-[clamp(12px,3.8vw,44px)]"
       image="/images/placeholder/about-main.jpg"
       eyebrow="Nos activités / Immobilier"
-      lead="Terrains, villas, immeubles à usage commercial ou résidentiel : ACOGIM-CI accompagne particuliers et entreprises dans leurs transactions immobilières à Abidjan et environs."
     >
-      Achat et vente de <span>biens immobiliers.</span>
+      Achat et vente de <span>parcelles.</span><br>
+      Construction <span>immobilière.</span><br>
+      Gestion et vente de <span>biens immobiliers.</span>
     </PageHero>
 
     <!-- Accompagnement -->
@@ -63,10 +65,10 @@ const accompagnement = [
           <div>
             <p v-reveal class="eyebrow !text-palm mb-4">Biens disponibles</p>
             <h2 v-reveal="100" class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15]">
-              Dans notre <span class="text-orange italic font-normal">catalogue.</span>
+              Dans notre <span class="text-orange italic font-normal">photothèque.</span>
             </h2>
           </div>
-          <NuxtLink v-reveal="200" to="/catalogue" class="btn-outline !border-white/20 self-start md:self-auto">Tout le catalogue</NuxtLink>
+          <NuxtLink v-reveal="200" to="/phototheque" class="btn-outline !border-white/20 self-start md:self-auto">Toute la photothèque</NuxtLink>
         </div>
         <div class="grid gap-6 md:grid-cols-2">
           <article

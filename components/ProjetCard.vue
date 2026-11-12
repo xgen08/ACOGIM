@@ -15,12 +15,12 @@ const badge = {
     <div class="relative h-[260px] overflow-hidden bg-[#e5e5e5]">
       <img :src="asset(projet.image)" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <span
+      <!-- <span
         class="absolute top-5 left-5 px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.1em]"
         :class="badge[projet.statut]"
       >
         {{ projet.statut }}
-      </span>
+      </span> -->
     </div>
     <div class="p-7">
       <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-forest mb-2">{{ projet.categorie }}</p>

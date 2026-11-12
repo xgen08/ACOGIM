@@ -1,4 +1,16 @@
 <script setup>
+import { histoire, equipe } from '~/data/entreprise.js'
+
+// Structure : cahier des charges docs/AGOCIM_2.md, menu 2 (six sous-rubriques).
+const rubriques = [
+  { id: 'presentation', label: 'Présentation' },
+  { id: 'histoire', label: 'Notre histoire' },
+  { id: 'vision', label: 'Vision & mission' },
+  { id: 'valeurs', label: 'Nos valeurs' },
+  { id: 'equipe', label: 'Notre équipe' },
+  { id: 'poles', label: 'Nos pôles' }
+]
+
 // Le nom ACOGIM-CI, lettre par lettre.
 const acronyme = [
   { lettres: 'A', mot: 'Agence' },
@@ -11,55 +23,37 @@ const acronyme = [
 
 const fiche = [
   { valeur: 'SARL', label: 'Forme juridique' },
-  { valeur: '03', label: "Domaines d'activité" },
+  { valeur: '02', label: "Pôles d'activité" },
   { valeur: 'Bingerville', label: 'Siège, Abidjan' }
 ]
 
-const piliers = [
-  {
-    num: '01',
-    color: 'text-forest',
-    title: 'Nos activités',
-    items: [
-      'Achat et vente de biens immobiliers',
-      'Construction, gestion et vente de biens immobiliers',
-      'Maintenance industrielle'
-    ]
-  },
-  {
-    num: '02',
-    color: 'text-orange',
-    title: 'Notre politique',
-    text: "Une gestion rigoureuse de chaque projet, de l'étude à la livraison, et un accompagnement continu pour nos clients industriels via la GMAO et la sécurité électronique."
-  },
-  {
-    num: '03',
-    color: 'text-forest',
-    title: 'Notre ambition',
-    text: "Faire connaître ACOGIM-CI auprès des clients potentiels et du grand public, en donnant à voir nos réalisations, nos projets en cours et nos perspectives."
-  }
+const valeurs = [
+  { icon: 'check', color: 'text-forest', title: 'Professionnalisme', desc: 'Maîtrise technique et rigueur dans chaque intervention.' },
+  { icon: 'shield', color: 'text-orange', title: 'Intégrité', desc: 'Transparence avec nos clients, nos partenaires et nos équipes.' },
+  { icon: 'award', color: 'text-forest', title: 'Qualité', desc: 'Des solutions fiables, durables et performantes.' },
+  { icon: 'layers', color: 'text-orange', title: 'Innovation', desc: 'La recherche constante de meilleures façons de faire.' },
+  { icon: 'eye', color: 'text-forest', title: 'Sécurité', desc: 'La protection des personnes, des sites et des équipements.' }
 ]
 
-const metiers = [
+const poles = [
   {
     icon: 'home',
-    title: 'Immobilier',
-    desc: 'Achat et vente de biens immobiliers, pour particuliers et entreprises.',
+    title: 'Pôle immobilier',
+    desc: 'Acquisition de terrains et de biens, construction civile et industrielle, gestion et vente de biens immobiliers.',
     to: '/activites/immobilier'
   },
   {
-    icon: 'layers',
-    title: 'Construction',
-    desc: 'Construction, gestion et vente de biens immobiliers, du terrain à la livraison.',
-    to: '/activites/construction'
-  },
-  {
     icon: 'settings',
-    title: 'Maintenance industrielle',
-    desc: 'Projets et travaux de maintenance, GMAO et sécurité électronique.',
-    to: '/activites/maintenance-industrielle'
+    title: 'Pôle industriel',
+    desc: 'Études techniques, réalisation, maintenance, conseil, formation et accompagnement à la certification ISO.',
+    to: '/activites/industrie'
   }
 ]
+
+const initiales = (nom) =>
+  nom === 'À compléter'
+    ? '?'
+    : nom.replace(/^M(me|lle)?\.\s*/, '').split(/\s+/).map((m) => m[0]).slice(0, 2).join('').toUpperCase()
 </script>
 
 <template>
@@ -67,10 +61,9 @@ const metiers = [
     <PageHero
       image="/images/placeholder/cta-bg.jpg"
       eyebrow="Qui sommes-nous"
-      lead="Agence de Construction, de Gestion Immobilières et de Maintenance Côte d'Ivoire — une SARL basée à Bingerville, Abidjan."
+      lead="ACOGIM-CI SARL accompagne particuliers, entreprises et partenaires institutionnels dans leurs projets immobiliers et industriels."
     >
-      ACOGIM-CI, une agence à taille humaine,
-      <span>trois métiers complémentaires.</span>
+      Une entreprise, <span>deux pôles d'expertise.</span>
     </PageHero>
 
     <!-- Fiche d'identité, à cheval sur le hero -->
@@ -88,34 +81,51 @@ const metiers = [
       </div>
     </section>
 
-    <!-- Le nom décodé -->
-    <section class="bg-white py-[120px]">
+    <!-- Sommaire des sous-rubriques, collé sous le header -->
+    <nav aria-label="Sommaire" class="sticky top-24 lg:top-28 z-30 mt-16 bg-white/90 backdrop-blur-md border-y border-black/5">
+      <ul class="mx-auto max-w-[1280px] px-8 flex gap-2 overflow-x-auto py-3 [scrollbar-width:none]">
+        <li v-for="r in rubriques" :key="r.id" class="shrink-0">
+          <a :href="`#${r.id}`" class="block px-4 py-2 rounded-full text-sm font-medium text-charcoal hover:bg-black/[0.05] hover:text-ember transition-colors">
+            {{ r.label }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- 1. Présentation générale -->
+    <section id="presentation" class="bg-white py-[110px] scroll-mt-44">
       <div class="mx-auto max-w-[1280px] px-8 grid gap-16 lg:gap-[100px] lg:grid-cols-2 items-center">
         <div v-reveal="{ from: 'left' }">
-          <p class="eyebrow mb-4">Notre nom</p>
-          <h2 class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir mb-10">
-            Six lettres, <span class="text-orange italic font-normal">une promesse.</span>
+          <p class="eyebrow mb-4">Présentation générale</p>
+          <h2 class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir mb-6">
+            ACOGIM-CI SARL, <span class="text-orange italic font-normal">immobilier et industrie.</span>
           </h2>
-          <ul class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <p class="text-[17px] leading-[1.9] text-muted mb-5">
+            ACOGIM-CI est une société à responsabilité limitée (SARL) dont le siège est à
+            Bingerville, Abidjan. Elle est spécialisée dans deux domaines d'activités stratégiques :
+            l'immobilier et l'industrie.
+          </p>
+          <p class="text-[17px] leading-[1.9] text-muted mb-10">
+            Elle accompagne les particuliers, les entreprises et les partenaires institutionnels
+            en proposant des solutions adaptées à leurs besoins et aux exigences de leur secteur.
+          </p>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted mb-4">Notre nom</p>
+          <ul class="grid grid-cols-3 gap-3">
             <li
               v-for="(a, i) in acronyme"
               :key="a.lettres"
               v-reveal="i * 80"
-              class="rounded px-5 py-6 shadow-[0_4px_24px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_10px_32px_rgba(0,0,0,0.08)]"
+              class="rounded px-4 py-4 shadow-[0_4px_24px_rgba(0,0,0,0.05)]"
               :class="a.accent ? 'bg-palm' : 'bg-white'"
             >
-              <span class="block font-display text-4xl font-bold leading-none" :class="a.accent ? 'text-noir' : 'text-forest'">{{ a.lettres }}</span>
-              <span class="block mt-3 text-sm" :class="a.accent ? 'text-noir font-medium' : 'text-muted'">{{ a.mot }}</span>
+              <span class="block font-display text-3xl font-bold leading-none" :class="a.accent ? 'text-noir' : 'text-forest'">{{ a.lettres }}</span>
+              <span class="block mt-2 text-xs" :class="a.accent ? 'text-noir font-medium' : 'text-muted'">{{ a.mot }}</span>
             </li>
           </ul>
         </div>
 
-        <div v-reveal="{ from: 'right', delay: 150 }" class="relative h-[420px] md:h-[500px]">
-          <img
-            :src="asset('/images/placeholder/about-main.jpg')"
-            alt=""
-            class="w-[85%] h-full object-cover rounded"
-          />
+        <div v-reveal="{ from: 'right', delay: 150 }" class="relative h-[420px] md:h-[520px]">
+          <img :src="asset('/images/placeholder/about-main.jpg')" alt="" class="w-[85%] h-full object-cover rounded" />
           <img
             :src="asset('/images/placeholder/about-overlay.jpg')"
             alt=""
@@ -125,107 +135,150 @@ const metiers = [
       </div>
     </section>
 
-    <!-- Ce qui nous guide -->
-    <section class="bg-concrete py-[120px]">
+    <!-- 2. Notre histoire (contenu provisoire : data/entreprise.js) -->
+    <section id="histoire" class="bg-concrete py-[110px] scroll-mt-44">
       <div class="mx-auto max-w-[1280px] px-8">
-        <p v-reveal class="eyebrow mb-4">Ce qui nous guide</p>
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p v-reveal class="eyebrow mb-4">Notre histoire</p>
+            <h2 v-reveal="100" class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir">
+              Les étapes <span class="text-orange italic font-normal">qui nous ont construits.</span>
+            </h2>
+          </div>
+          <span v-if="histoire.provisoire" class="px-3 py-1.5 rounded-full bg-noir/[0.06] text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">
+            Contenu provisoire
+          </span>
+        </div>
+
+        <ol class="relative mt-[60px] grid gap-10 md:grid-cols-4 md:gap-6">
+          <span aria-hidden="true" class="hidden md:block absolute top-[11px] left-0 right-0 h-px bg-black/10"></span>
+          <li v-for="(e, i) in histoire.etapes" :key="e.titre" v-reveal="i * 120" class="relative pl-10 md:pl-0">
+            <span aria-hidden="true" class="absolute left-0 top-0 md:static block w-6 h-6 rounded-full border-4 border-concrete bg-palm ring-1 ring-palm/40 md:mb-8"></span>
+            <p class="text-[12px] font-semibold uppercase tracking-[0.15em] text-forest mb-2">{{ e.annee }}</p>
+            <h3 class="font-body text-lg font-semibold text-noir mb-2">{{ e.titre }}</h3>
+            <p class="text-[15px] leading-[1.7] text-muted">{{ e.texte }}</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3 & 4. Vision et mission -->
+    <section id="vision" class="glow isolate bg-noir text-white py-[110px] scroll-mt-44">
+      <img :src="asset('/images/placeholder/stats-bg.jpg')" alt="" class="absolute inset-0 -z-10 w-full h-full object-cover" />
+      <div class="absolute inset-0 -z-10 bg-noir/85"></div>
+      <div class="relative z-10 mx-auto max-w-[1280px] px-8 grid gap-6 md:grid-cols-2">
+        <div v-reveal="{ from: 'left' }" class="rounded bg-white/[0.08] border border-white/10 backdrop-blur-md p-10 md:p-12">
+          <AppIcon name="eye" class="w-10 h-10 text-palm mb-6" />
+          <p class="eyebrow !text-palm mb-4">Notre vision</p>
+          <h2 class="font-display text-3xl font-semibold leading-[1.2] mb-5">
+            Devenir un <span class="text-orange italic font-normal">partenaire de référence.</span>
+          </h2>
+          <p class="text-[16px] leading-[1.9] text-white/75">
+            ACOGIM-CI ambitionne de devenir un partenaire de référence dans l'immobilier et
+            l'industrie, en apportant des solutions fiables, durables et performantes, et en
+            contribuant durablement au développement de ses clients et de ses partenaires.
+          </p>
+        </div>
+        <div v-reveal="{ from: 'right', delay: 150 }" class="rounded bg-white/[0.08] border border-white/10 backdrop-blur-md p-10 md:p-12">
+          <AppIcon name="clipboard" class="w-10 h-10 text-palm mb-6" />
+          <p class="eyebrow !text-palm mb-4">Notre mission</p>
+          <h2 class="font-display text-3xl font-semibold leading-[1.2] mb-5">
+            Des solutions <span class="text-orange italic font-normal">adaptées à chaque projet.</span>
+          </h2>
+          <p class="text-[16px] leading-[1.9] text-white/75">
+            Accompagner les particuliers, les entreprises et les partenaires institutionnels
+            dans la réalisation de leurs projets, avec des solutions adaptées à leurs besoins
+            et aux exigences de leur secteur, fondées sur l'écoute et la maîtrise technique.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Nos valeurs -->
+    <section id="valeurs" class="bg-white py-[110px] scroll-mt-44">
+      <div class="mx-auto max-w-[1280px] px-8">
+        <p v-reveal class="eyebrow mb-4">Nos valeurs</p>
         <h2 v-reveal="100" class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir">
-          Une même exigence, <span class="text-orange italic font-normal">de l'étude à la livraison.</span>
+          Ce qui guide <span class="text-orange italic font-normal">chacune de nos actions.</span>
         </h2>
-        <div class="grid gap-8 md:grid-cols-3 mt-[60px]">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 mt-[60px]">
           <div
-            v-for="(p, i) in piliers"
-            :key="p.title"
-            v-reveal="i * 120"
-            class="bg-white rounded px-10 py-12 shadow-[0_4px_24px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_10px_32px_rgba(0,0,0,0.08)]"
+            v-for="(v, i) in valeurs"
+            :key="v.title"
+            v-reveal="i * 100"
+            class="p-8 bg-white rounded shadow-[0_4px_24px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_10px_32px_rgba(0,0,0,0.08)]"
           >
-            <p class="font-display text-5xl font-bold leading-none mb-6" :class="p.color">{{ p.num }}</p>
-            <h3 class="font-body text-[22px] font-semibold text-noir mb-4">{{ p.title }}</h3>
-            <ul v-if="p.items" class="space-y-3">
-              <li v-for="item in p.items" :key="item" class="flex gap-3 text-[15px] leading-[1.7] text-muted">
-                <span class="mt-[11px] w-4 h-px shrink-0 bg-palm"></span>
-                {{ item }}
-              </li>
-            </ul>
-            <p v-else class="text-[15px] leading-[1.8] text-muted">{{ p.text }}</p>
+            <AppIcon :name="v.icon" class="w-9 h-9 mb-5" :class="v.color" />
+            <h3 class="font-body text-lg font-semibold text-noir mb-2">{{ v.title }}</h3>
+            <p class="text-sm leading-[1.7] text-muted">{{ v.desc }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Trois métiers -->
-    <section class="glow isolate bg-noir text-white py-[120px]">
-      <img
-        :src="asset('/images/placeholder/stats-bg.jpg')"
-        alt=""
-        class="absolute inset-0 -z-10 w-full h-full object-cover"
-      />
+    <!-- 6. Notre équipe (contenu provisoire : data/entreprise.js) -->
+    <section id="equipe" class="bg-concrete py-[110px] scroll-mt-44">
+      <div class="mx-auto max-w-[1280px] px-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p v-reveal class="eyebrow mb-4">Notre équipe</p>
+            <h2 v-reveal="100" class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir">
+              Les femmes et les hommes <span class="text-orange italic font-normal">d'ACOGIM-CI.</span>
+            </h2>
+          </div>
+          <span v-if="equipe.provisoire" class="px-3 py-1.5 rounded-full bg-noir/[0.06] text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">
+            Contenu provisoire
+          </span>
+        </div>
+
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-[60px]">
+          <article
+            v-for="(m, i) in equipe.membres"
+            :key="m.fonction"
+            v-reveal="i * 120"
+            class="bg-white rounded overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.05)]"
+          >
+            <div class="aspect-[4/3] bg-gradient-to-br from-palm/25 via-concrete to-orange/15 grid place-items-center">
+              <img v-if="m.photo" :src="asset(m.photo)" :alt="m.nom" class="w-full h-full object-cover" />
+              <span v-else class="grid place-items-center w-24 h-24 rounded-full bg-white text-forest font-display text-3xl font-bold shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+                {{ initiales(m.nom) }}
+              </span>
+            </div>
+            <div class="p-7">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-forest mb-2">{{ m.fonction }}</p>
+              <h3 class="font-body text-lg font-semibold mb-1" :class="m.nom === 'À compléter' ? 'text-muted italic' : 'text-noir'">{{ m.nom }}</h3>
+              <p class="text-sm text-muted">{{ m.expertise }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos deux pôles (résumé avec liens) -->
+    <section id="poles" class="glow isolate bg-noir text-white py-[110px] scroll-mt-44">
+      <img :src="asset('/images/placeholder/construction-site.jpg')" alt="" class="absolute inset-0 -z-10 w-full h-full object-cover" />
       <div class="absolute inset-0 -z-10 bg-noir/80"></div>
       <div class="relative z-10 mx-auto max-w-[1280px] px-8">
-        <p v-reveal class="eyebrow !text-palm mb-4">Nos métiers</p>
+        <p v-reveal class="eyebrow !text-palm mb-4">Nos domaines d'activité</p>
         <h2 v-reveal="100" class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] mb-[60px]">
-          Trois savoir-faire, <span class="text-orange italic font-normal">une seule agence.</span>
+          Deux pôles, <span class="text-orange italic font-normal">une seule exigence.</span>
         </h2>
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2">
           <NuxtLink
-            v-for="(m, i) in metiers"
-            :key="m.to"
+            v-for="(p, i) in poles"
+            :key="p.to"
             v-reveal="i * 120"
-            :to="m.to"
+            :to="p.to"
             class="group flex flex-col bg-white/[0.14] backdrop-blur-md rounded px-8 py-10 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition-colors duration-300 hover:bg-white/[0.2]"
           >
-            <AppIcon :name="m.icon" class="w-10 h-10 text-palm mb-6" />
-            <h3 class="font-display text-2xl font-semibold mb-3">{{ m.title }}</h3>
-            <p class="text-[15px] leading-[1.7] text-white/80 mb-8">{{ m.desc }}</p>
+            <AppIcon :name="p.icon" class="w-10 h-10 text-palm mb-6" />
+            <h3 class="font-display text-2xl font-semibold mb-3">{{ p.title }}</h3>
+            <p class="text-[15px] leading-[1.7] text-white/80 mb-8">{{ p.desc }}</p>
             <span class="mt-auto inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.05em] text-palm">
               Découvrir
               <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
           </NuxtLink>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact projet -->
-    <section class="bg-white py-[120px]">
-      <div class="mx-auto max-w-[1280px] px-8 grid gap-12 lg:grid-cols-2 items-center">
-        <div v-reveal="{ from: 'left' }">
-          <p class="eyebrow mb-4">Contact projet</p>
-          <h2 class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir mb-6">
-            Un interlocuteur <span class="text-orange italic font-normal">pour votre projet.</span>
-          </h2>
-          <p class="text-[17px] leading-[1.9] text-muted max-w-[480px]">
-            Décrivez-nous votre besoin : nous revenons vers vous pour en
-            discuter et vous proposer un devis.
-          </p>
-        </div>
-
-        <div v-reveal="{ from: 'right', delay: 150 }" class="bg-white rounded p-10 shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
-          <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted mb-2">Responsable projet</p>
-          <p class="font-display text-3xl font-semibold text-noir mb-8">M. YEO Nandielè</p>
-
-          <ul class="space-y-4 text-[15px]">
-            <li class="flex items-center gap-4">
-              <span class="w-10 h-10 shrink-0 rounded-full bg-palm/20 text-forest flex items-center justify-center">
-                <svg aria-hidden="true" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></svg>
-              </span>
-              <span class="flex flex-col">
-                <a href="tel:+2250707000207" class="text-noir hover:text-ember transition-colors">+225 07 07 00 02 07</a>
-                <a href="tel:+2250105000150" class="text-noir hover:text-ember transition-colors">+225 01 05 00 01 50</a>
-              </span>
-            </li>
-            <li class="flex items-center gap-4">
-              <span class="w-10 h-10 shrink-0 rounded-full bg-palm/20 text-forest flex items-center justify-center">
-                <AppIcon name="map-pin" class="w-5 h-5" />
-              </span>
-              <span class="text-muted">
-                Ayopoumin Ex-Mittérand, Villa n° 356, Bingerville<br>
-                BP : 705 CIDEX 03 Abidjan
-              </span>
-            </li>
-          </ul>
-
-          <NuxtLink to="/contact" class="btn-primary mt-10 w-full sm:w-auto">Demander un devis</NuxtLink>
         </div>
       </div>
     </section>

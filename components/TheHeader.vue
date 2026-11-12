@@ -4,9 +4,9 @@ const activitesOpen = ref(false)
 const scrolled = ref(false)
 
 const activites = [
-  { label: 'Immobilier', desc: 'Gestion, vente et location', to: '/activites/immobilier' },
+  { label: 'Immobilier', desc: 'ACHATS, GESTION, VENTES', to: '/activites/immobilier' },
   // { label: 'Construction', desc: 'Bâtiments et travaux neufs', to: '/activites/construction' },
-  { label: 'Maintenance industrielle', desc: 'Entretien et dépannage', to: '/activites/maintenance-industrielle' }
+  { label: 'Industrie', desc: 'Études, réalisation, conseil, ISO', to: '/activites/industrie' }
 ]
 
 function onScroll() {
@@ -51,9 +51,11 @@ onUnmounted(() => {
 
 const drawerLink = 'flex items-center justify-between py-4 border-b border-black/[0.08] text-[16px] font-semibold text-noir hover:text-ember transition-colors'
 
-// Lien de navigation : pastille grise arrondie pour la page en cours et au survol.
-const navLink = 'inline-flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-noir/80 hover:text-noir hover:bg-black/[0.04] transition-colors'
-const navActive = '!text-noir bg-black/[0.05]'
+// Style « Invena » : liens foncés en gras (orange au survol / page en cours),
+// boutons carrés gris clair et bouton d'action plein sombre.
+const navLink = 'inline-flex items-center gap-1.5 py-2.5 text-noir hover:text-ember transition-colors'
+const navActive = '!text-ember'
+const squareBtn = 'grid place-items-center w-12 h-12 xl:w-14 xl:h-14 rounded-xl bg-black/[0.05] text-noir hover:bg-black/[0.09] transition-colors'
 </script>
 
 <template>
@@ -61,19 +63,19 @@ const navActive = '!text-noir bg-black/[0.05]'
     class="sticky top-0 z-50 bg-white transition-shadow duration-300"
     :class="scrolled ? 'shadow-[0_1px_0_rgba(0,0,0,0.06),0_6px_20px_rgba(0,0,0,0.04)]' : ''"
   >
-    <div class="mx-auto max-w-[1280px] px-5 sm:px-8">
+    <div class="mx-auto max-w-[1320px] px-5 sm:px-8">
       <div class="flex h-24 lg:h-28 items-center justify-between gap-6">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center shrink-0" aria-label="ACOGIM-CI, retour à l'accueil">
           <img
             :src="asset('/images/logo/acogim-lockup.png')"
             alt="ACOGIM-CI"
-            class="h-[76px] lg:h-[92px] w-auto"
+            class="h-[76px] lg:h-[80px] xl:h-[92px] w-auto"
           >
         </NuxtLink>
 
         <!-- Desktop nav -->
-        <nav class="hidden lg:flex items-center gap-1 text-[15px] font-medium whitespace-nowrap">
+        <nav class="hidden lg:flex items-center gap-5 xl:gap-9 text-[15px] xl:text-[16px] font-semibold whitespace-nowrap">
           <NuxtLink to="/" :class="navLink" :exact-active-class="navActive">Accueil</NuxtLink>
           <NuxtLink to="/qui-sommes-nous" :class="navLink" :exact-active-class="navActive">Qui sommes-nous</NuxtLink>
 
@@ -110,43 +112,42 @@ const navActive = '!text-noir bg-black/[0.05]'
           </div>
 
           <NuxtLink to="/realisations" :class="navLink" :exact-active-class="navActive">Réalisations</NuxtLink>
-          <NuxtLink to="/catalogue" :class="navLink" :exact-active-class="navActive">Catalogue</NuxtLink>
+          <NuxtLink to="/phototheque" :class="navLink" :exact-active-class="navActive">Photothèque</NuxtLink>
         </nav>
 
         <!-- Actions -->
-        <div class="hidden lg:flex items-center gap-3">
+        <div class="flex items-center gap-2 xl:gap-3">
           <a
             href="tel:+2250707000207"
-            class="grid place-items-center w-11 h-11 rounded-lg text-noir/80 hover:text-noir hover:bg-black/[0.04] transition-colors"
+            :class="squareBtn" class="hidden lg:grid"
             aria-label="Appeler le +225 07 07 00 02 07"
             title="+225 07 07 00 02 07"
           >
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </a>
           <NuxtLink
             to="/contact"
-            class="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-ember px-5 py-3 text-[15px] font-medium text-white hover:bg-orange transition-colors"
+            class="hidden lg:inline-flex items-center h-12 xl:h-14 px-6 xl:px-8 whitespace-nowrap rounded-xl bg-ember text-[15px] xl:text-[16px] font-semibold text-white hover:bg-orange transition-colors"
           >
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             Nous contacter
           </NuxtLink>
+          <!-- Menu (tiroir latéral), sur mobile comme sur ordinateur -->
+          <button
+            :class="squareBtn"
+            :aria-expanded="open"
+            aria-controls="menu-mobile"
+            aria-label="Ouvrir le menu"
+            @click="open = true"
+          >
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 7h14M5 12h9M5 17h14"/></svg>
+          </button>
         </div>
 
-        <!-- Mobile toggle -->
-        <button
-          class="lg:hidden grid place-items-center w-11 h-11 -mr-2 rounded-lg hover:bg-black/[0.04] transition-colors"
-          :aria-expanded="open"
-          aria-controls="menu-mobile"
-          aria-label="Ouvrir le menu"
-          @click="open = true"
-        >
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        </button>
       </div>
     </div>
 
     <!-- Tiroir mobile : glisse depuis la droite sur un voile sombre -->
-    <div class="lg:hidden fixed inset-0 z-[60]" :class="open ? 'visible' : 'invisible pointer-events-none'" :aria-hidden="!open">
+    <div class="fixed inset-0 z-[60] overflow-hidden" :class="open ? 'visible' : 'invisible pointer-events-none'" :aria-hidden="!open">
       <!-- Voile -->
       <div
         class="absolute inset-0 bg-noir/60 transition-opacity duration-300"
@@ -173,7 +174,7 @@ const navActive = '!text-noir bg-black/[0.05]'
         </button>
 
         <div class="h-full overflow-y-auto px-8 pt-14 pb-10">
-          <NuxtLink to="/" class="block w-fit" aria-label="ACOGIM-CI, retour à l'accueil" :tabindex="open ? 0 : -1">
+          <NuxtLink to="/" class="block w-fit mx-auto" aria-label="ACOGIM-CI, retour à l'accueil" :tabindex="open ? 0 : -1">
             <img :src="asset('/images/logo/acogim-lockup.png')" alt="ACOGIM-CI" class="h-24 w-auto">
           </NuxtLink>
 
@@ -210,7 +211,7 @@ const navActive = '!text-noir bg-black/[0.05]'
             </div>
 
             <NuxtLink to="/realisations" :class="drawerLink" exact-active-class="!text-ember" :tabindex="open ? 0 : -1">Réalisations</NuxtLink>
-            <NuxtLink to="/catalogue" :class="drawerLink" exact-active-class="!text-ember" :tabindex="open ? 0 : -1">Catalogue</NuxtLink>
+            <NuxtLink to="/phototheque" :class="drawerLink" exact-active-class="!text-ember" :tabindex="open ? 0 : -1">Photothèque</NuxtLink>
             <NuxtLink to="/contact" :class="drawerLink" exact-active-class="!text-ember" :tabindex="open ? 0 : -1">Contact</NuxtLink>
           </nav>
 

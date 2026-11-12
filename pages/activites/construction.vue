@@ -1,5 +1,5 @@
 <script setup>
-import { items } from '~/data/catalogue.js'
+import { items } from '~/data/phototheque.js'
 import { projets } from '~/data/projets.js'
 
 const offre = items.find((i) => i.categorie === 'Construction')

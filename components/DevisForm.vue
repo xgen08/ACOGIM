@@ -52,7 +52,7 @@ const field = 'w-full rounded bg-concrete border border-transparent px-4 py-3 te
           <option value="">Sélectionner...</option>
           <option>Immobilier — achat / vente</option>
           <option>Construction</option>
-          <option>Maintenance industrielle</option>
+          <option>Industrie — études, réalisation, conseil, formation, ISO</option>
           <option>Sécurité électronique (vidéosurveillance, contrôle d'accès, incendie)</option>
           <option>Autre</option>
         </select>

@@ -6,6 +6,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Empêche tout débordement horizontal (animations qui arrivent depuis la droite,
+   tiroir mobile hors écran). « clip » ne casse pas le header collé en haut, contrairement à « hidden ». */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   @apply bg-paper text-charcoal font-body antialiased leading-[1.7];
 }

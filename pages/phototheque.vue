@@ -1,5 +1,5 @@
 <script setup>
-import { items } from '~/data/catalogue.js'
+import { items } from '~/data/phototheque.js'
 
 const categories = ['Tous', ...new Set(items.map((i) => i.categorie))]
 const filtre = ref('Tous')
@@ -18,7 +18,7 @@ function toggle(nom) {
   <div>
     <PageHero
       image="/images/placeholder/construction-site.jpg"
-      eyebrow="Catalogue"
+      eyebrow="Photothèque"
       lead="Chaque bien ou service peut faire l'objet d'une demande de devis directe : sélectionnez un élément et complétez le formulaire, notre équipe revient vers vous avec une proposition adaptée. Photos génériques à titre d'illustration."
     >
       Biens et services, <span>sur devis.</span>
@@ -28,7 +28,7 @@ function toggle(nom) {
       <div class="mx-auto max-w-[1280px] px-8">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-[60px]">
           <div>
-            <p v-reveal class="eyebrow mb-4">Le catalogue</p>
+            <p v-reveal class="eyebrow mb-4">La photothèque</p>
             <h2 v-reveal="100" class="font-display font-semibold text-[clamp(32px,4vw,48px)] leading-[1.15] text-noir">
               Sélectionnez, <span class="text-orange italic font-normal">nous chiffrons.</span>
             </h2>
@@ -92,7 +92,7 @@ function toggle(nom) {
     </section>
 
     <DevisSection
-      subject="Catalogue"
+      subject="Photothèque"
       :title="selected ? `Devis — ${selected}` : 'Demander un devis'"
     >
       <template #title>Recevez <span>une proposition adaptée.</span></template>
