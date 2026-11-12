@@ -15,7 +15,7 @@ defineProps({
 
 <template>
   <!-- Section devis : texte et coordonnées à gauche, formulaire à droite. -->
-  <section id="devis" class="bg-concrete py-[120px] scroll-mt-16">
+  <section id="devis" class="bg-concrete py-[120px] scroll-mt-28">
     <div class="mx-auto max-w-[1280px] px-8 grid gap-12 lg:gap-20 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start">
       <div v-reveal="{ from: 'left' }" class="lg:sticky lg:top-28">
         <p class="eyebrow mb-4">{{ eyebrow }}</p>
