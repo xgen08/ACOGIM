@@ -108,9 +108,9 @@ const afficherCta = computed(() => !pagesSansCta.includes(page.value))
         <div>
           <h4 class="font-body text-xs font-semibold uppercase tracking-[0.15em] mb-7">Navigation</h4>
           <ul class="space-y-4 text-sm text-white/60">
+            <li><NuxtLink to="/activites/construction" class="hover:text-palm transition-colors">Construction</NuxtLink></li>
             <li><NuxtLink to="/activites/immobilier" class="hover:text-palm transition-colors">Immobilier</NuxtLink></li>
             <li><NuxtLink to="/activites/industrie" class="hover:text-palm transition-colors">Industrie</NuxtLink></li>
-            <li><NuxtLink to="/activites/construction" class="hover:text-palm transition-colors">Construction</NuxtLink></li>
             <!-- <li><NuxtLink to="/contact" class="hover:text-palm transition-colors">Contact</NuxtLink></li> -->
           </ul>
         </div>
